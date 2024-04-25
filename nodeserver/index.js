@@ -6,6 +6,7 @@ const path=require('path')
 const bodyParser = require('body-parser');
 const app=express();
 require('dotenv').config()
+const PORT=process.env.PORT
 app.use(express.static(path.join(__dirname,"..", 'frontend')));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -23,7 +24,7 @@ const connectDB = async () => {
 }
 connectDB()
 
-app.listen(3000,()=>{
+app.listen(PORT,()=>{
     console.log("listening on port 3000")
 })
 
