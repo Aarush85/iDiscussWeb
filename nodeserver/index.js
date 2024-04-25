@@ -5,7 +5,7 @@ const User=require('./usermodel')
 const path=require('path')
 const bodyParser = require('body-parser');
 const app=express();
-
+require('dotenv').config()
 app.use(express.static(path.join(__dirname,"..", 'frontend')));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const connectDB = async () => {
     try {
-        await mongoose.connect("mongodb+srv://aarushkaura09062004:NiVEqvOiGuBRnz6n@cluster1.qe2fn90.mongodb.net/Projects");
+        await mongoose.connect(process.env.MONGO_URL);
         console.log("Connected to Mongo DB");
         counter=0
     } catch (error) {
