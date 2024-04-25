@@ -1,10 +1,16 @@
-const io = require('socket.io')(8000,{cors:{origin:"*"}});
+// const io = require('socket.io')(8000,{cors:{origin:"*"}});
+const soc = require('socket.io');
 const express=require('express')
 const mongoose = require('mongoose');
 const User=require('./usermodel')
 const path=require('path')
 const bodyParser = require('body-parser');
 const app=express();
+const hostname='0.0.0.0'
+const server = app.listen(process.env.PORT || 3000,hostname, () => {
+    console.log("listening on port :3000");
+});
+const io = soc(server);
 require('dotenv').config()
 const PORT=process.env.PORT
 app.use(express.static(path.join(__dirname,"..", 'frontend')));
@@ -24,9 +30,9 @@ const connectDB = async () => {
 }
 connectDB()
 
-app.listen(PORT,()=>{
-    console.log("listening on port 3000")
-})
+// app.listen(PORT,()=>{
+//     console.log("listening on port 3000")
+// })
 
 
 
@@ -57,8 +63,6 @@ app.post('/loggedin',async (req,res)=>{
         if (check.password === req.body.password) {
             em=check.email
             res.status(201).sendFile(path.join(__dirname,'../index.html'))
-            
-
         }
 
         else {
