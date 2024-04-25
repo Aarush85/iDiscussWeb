@@ -4,6 +4,7 @@
   "description": "This is a node Server for our ichat app",
   "main": "index.js",
   "scripts": {
+    "start":"node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "aarush",
